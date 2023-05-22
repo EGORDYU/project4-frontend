@@ -21,6 +21,11 @@ export const Logout = () => {
 
         localStorage.clear();
         axios.defaults.headers.common['Authorization'] = null;
+
+        // Delay the redirection to ensure local storage is cleared
+        
+          window.location.href = '/login';
+        
       } catch (error) {
         console.log('Logout not working', error);
       }
@@ -29,3 +34,4 @@ export const Logout = () => {
 
   return null;
 };
+
