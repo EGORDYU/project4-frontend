@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { buildOrdersApi } from '../API.js';
+import axios from "axios";
 
 const BuildOrderList = () => {
   const [buildOrders, setBuildOrders] = useState([]);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetchBuildOrders();
+    checkAuthentication();
   }, []);
 
   const fetchBuildOrders = async () => {
@@ -18,9 +21,28 @@ const BuildOrderList = () => {
     }
   };
 
+  const checkAuthentication = async () => {
+    if(localStorage.getItem('access_token') === null){                   
+      window.location.href = '/login'
+    }
+    else{
+      try {
+        const {data} = await axios.get('http://localhost:8000/home/', {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        setMessage(data.message);
+      } catch (e) {
+        console.log('not auth')
+      }
+    }
+  };
+
   return (
     <div>
       <h1>Build Order List</h1>
+      <h3>Hi {message}</h3>
       {buildOrders.map((buildOrder) => (
         <div key={buildOrder.id}>
           <Link to={`/buildorders/${buildOrder.id}`}>
