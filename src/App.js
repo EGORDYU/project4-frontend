@@ -1,31 +1,19 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import './App.css';
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import BuildOrderList from './components/BuildOrderList';
+import BuildOrderDetails from './components/BuildOrderDetails';
 import MakeBO from './components/MakeBO';
-import BuildOrderList from "./components/BuildOrderList";
-
 
 function App() {
-
-  const [buildOrder, setBuildOrder] = useState([])
- 
-  useEffect(() => {
-    axios
-    .get("/api/buildorders/")
-    .then((res) => {
-      setBuildOrder(res.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [])
-
-  return(
-    <div>
-      <BuildOrderList buildOrder={buildOrder}/>
-    </div>
-  )
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<BuildOrderList />} />
+        <Route path="/buildorders/:id" element={<BuildOrderDetails />} />
+        <Route path="/makebo" element={<MakeBO />} />
+      </Routes>
+    </Router>
+  );
 }
 
 export default App;

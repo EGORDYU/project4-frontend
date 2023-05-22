@@ -1,36 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { buildOrdersApi } from '../API.js';
 
-const BuildOrderList = () => {
-  const [buildOrders, setBuildOrders] = useState([]);
+const BuildOrderDetails = () => {
+  const { id } = useParams();
+  const [buildOrder, setBuildOrder] = useState(null);
 
   useEffect(() => {
-    fetchBuildOrders();
+    fetchBuildOrder();
   }, []);
 
-  const fetchBuildOrders = async () => {
+  const fetchBuildOrder = async () => {
     try {
-      const response = await buildOrdersApi.get('/');
-      setBuildOrders(response.data);
+      const response = await buildOrdersApi.get(`/${id}`);
+      setBuildOrder(response.data);
     } catch (error) {
-      console.error('Error fetching build orders:', error);
+      console.error('Error fetching build order:', error);
     }
   };
 
+  if (!buildOrder) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
-      <h1>Build Order List</h1>
-      {buildOrders.map((buildOrder) => (
-        <div key={buildOrder.id}>
-          <Link to={`/buildorders/${buildOrder.id}`}>
-            <h2>{buildOrder.title}</h2>
-          </Link>
-          <p>{buildOrder.description}</p>
-        </div>
-      ))}
+      <h1>Build Order Details</h1>
+      <h2>{buildOrder.title}</h2>
+      <p>{buildOrder.description}</p>
     </div>
   );
 };
 
-export default BuildOrderList;
+export default BuildOrderDetails;
