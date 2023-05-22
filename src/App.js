@@ -3,6 +3,7 @@ import axios from "axios";
 import './App.css';
 import React from 'react';
 import MakeBO from './components/MakeBO';
+import BuildOrderList from "./components/BuildOrderList";
 
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
 
   return(
     <div>
-      <MakeBO buildOrder={buildOrder}/>
+      <BuildOrderList buildOrder={buildOrder}/>
     </div>
   )
 }
