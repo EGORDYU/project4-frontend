@@ -51,39 +51,5 @@ export default function MakeBO() {
     }
   };
 
-  return (
-    <>
-      <div>
-        {buildOrders.map((buildOrder) => (
-          <div
-            key={buildOrder.id}
-          >
-            <h2>{buildOrder.title}</h2>
-            <p>{buildOrder.description}</p>
-            <button onClick={() => onDelete(buildOrder.id)}>Delete</button>
-            <button onClick={() => selectBuildOrder(buildOrder.id)}>Select</button>
-            <button onClick={() => onUpdate(buildOrder.id)}>Edit</button>
-          </div>
-        ))}
-      </div>
-      <h1>Add/Edit a build order!</h1>
-      <form>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder={'title'}
-          type='text'
-          name='title'
-        />
-        <input
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder={'description'}
-          type='text'
-          name='description'
-        />
-        <button onClick={onSubmit}>Add</button>
-      </form>
-    </>
-  );
+  
 }
