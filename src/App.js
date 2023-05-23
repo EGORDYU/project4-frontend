@@ -5,7 +5,8 @@ import BuildOrderDetails from './components/BuildOrderDetails';
 import MakeBO from './components/MakeBO';
 import { Navigation } from './components/partials/navigations';
 import {Logout} from './components/logout';
-import {Login} from "./components/login";
+import {Login} from "./components/Login";
+import UserPage from './components/UserPage';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<BuildOrderList />} />
         <Route path="/login" element={<Login/>}/>
+        <Route path="/users/create" element={<UserPage/>} />
         <Route path="/logout" element={<Logout/>}/>
         <Route path="/buildorders/:id" element={<BuildOrderDetails />} />
         <Route path="/makebo" element={<MakeBO />} />

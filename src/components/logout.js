@@ -6,28 +6,40 @@ export const Logout = () => {
     (async () => {
       try {
         const refreshToken = localStorage.getItem('refresh_token');
+        let accessToken = localStorage.getItem('access_token');
 
-        await axios.post(
+        // Ensure the access token exists
+        if (!accessToken) {
+          console.error('Access token is missing.');
+          return;
+        }
+
+        // Trim any whitespace from the access token
+        accessToken = accessToken.trim();
+
+        const response = await axios.post(
           'http://localhost:8000/logout/',
           { refresh_token: refreshToken },
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+              Authorization: `Bearer ${accessToken}`,
             },
             withCredentials: true,
           }
         );
 
-        localStorage.clear();
-        axios.defaults.headers.common['Authorization'] = null;
-
-        // Delay the redirection to ensure local storage is cleared
-        
-          window.location.href = '/login';
+        // Check for successful response
+        if (response.status === 205) {
+            localStorage.clear();
+            axios.defaults.headers.common['Authorization'] = null;
+            window.location.href = '/login';
+        } else {
+            console.error('Failed to log out on the server side.');
+        }
         
       } catch (error) {
-        console.log('Logout not working', error);
+        console.error('Logout not working', error);
       }
     })();
   }, []);
@@ -35,3 +47,4 @@ export const Logout = () => {
   return null;
 };
 
+export default Logout;
