@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { buildOrdersApi } from '../API.js';
 import axios from "axios";
+import AboutMe from './partials/AboutMe.js';
+import { List, ListItem, ListItemText, ListItemIcon, Card, CardContent } from '@mui/material';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+
 
 const BuildOrderList = () => {
   const [buildOrders, setBuildOrders] = useState([]);
@@ -40,19 +44,28 @@ const BuildOrderList = () => {
   };
 
   return (
-    <div>
-      <h1>Build Order List</h1>
-      <h3>Hi {message}</h3>
-      {buildOrders.map((buildOrder) => (
-        <div key={buildOrder.id}>
-          <Link to={`/buildorders/${buildOrder.id}`}>
-            <h2>{buildOrder.title}</h2>
-          </Link>
-          <p>{buildOrder.description}</p>
+    <div style={{ display: 'flex', width: '100%', margin: 'auto' }}>
+      <div style={{ width: '60%' }}>
+        <div style={{ display: 'flex', width: '100%', margin: 'auto' }}>
+          <h1>BuildOrder List</h1>
         </div>
-      ))}
+        {buildOrders.map((buildOrder) => (
+          <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem' }}>
+            <CardContent>
+              <ListItem button component={Link} to={`/buildorders/${buildOrder.id}`}>
+                <ListItemText primary={buildOrder.title} secondary={buildOrder.description} />
+              </ListItem>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+      <AboutMe />
     </div>
   );
-};
+  
+  
+}
+
+
 
 export default BuildOrderList;

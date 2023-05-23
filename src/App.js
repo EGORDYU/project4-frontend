@@ -7,6 +7,7 @@ import { Navigation } from './components/partials/navigations';
 import {Logout} from './components/logout';
 import {Login} from "./components/Login";
 import UserPage from './components/UserPage';
+import AboutMe from './components/partials/AboutMe';
 
 function App() {
   return (

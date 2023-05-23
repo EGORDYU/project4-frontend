@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
+import { AppBar, Toolbar, Button } from '@mui/material';
 
 export function Navigation() {
   const [isAuth, setIsAuth] = useState(false);
@@ -11,17 +12,27 @@ export function Navigation() {
   }, []);
 
   return (
-    <div>
-      <nav style={{ backgroundColor: 'dark', color: 'white' }}>
-        <div>{isAuth ? <Link to="/">Home</Link> : <Link to="/users/create">User</Link>}</div>
-        <div>
-          {isAuth ? (
-            <Link to="/logout">Logout</Link>
-          ) : (
-            <Link to="/login">Login</Link>
-          )}
-        </div>
-      </nav>
-    </div>
+    <AppBar position="static">
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        {isAuth ? (
+          <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
+            Home
+          </Button>
+        ) : (
+          <Button color="inherit" component={RouterLink} to="/users/create" sx={{ textDecoration: 'none' }}>
+            User
+          </Button>
+        )}
+        {isAuth ? (
+          <Button color="inherit" component={RouterLink} to="/logout" sx={{ textDecoration: 'none' }}>
+            Logout
+          </Button>
+        ) : (
+          <Button color="inherit" component={RouterLink} to="/login" sx={{ textDecoration: 'none' }}>
+            Login
+          </Button>
+        )}
+      </Toolbar>
+    </AppBar>
   );
 }
