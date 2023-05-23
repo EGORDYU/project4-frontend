@@ -3,6 +3,17 @@ import { useParams } from 'react-router-dom';
 import { Grid, Typography, TextField, Button } from '@mui/material';
 import { buildOrdersApi, commentsApi } from '../API.js';
 import axios from 'axios';
+import Markdown from 'markdown-to-jsx';
+import './markdownTable.css';
+
+
+const MarkdownTable = ({ children }) => (
+    <table>
+      {children}
+    </table>
+  );
+  
+
 
 const BuildOrderDetails = () => {
   const { id } = useParams();
@@ -93,17 +104,19 @@ const BuildOrderDetails = () => {
           <Typography variant="h5">{buildOrder.matchup}</Typography>
         </Grid>
         <Grid item>
-          <Typography variant="body1">{buildOrder.description}</Typography>
-          <Typography variant="body1">{buildOrder.buildorder}</Typography>
+          <Markdown className="markdown-table">{buildOrder.description}</Markdown>
+          <Markdown className="markdown-table">{buildOrder.buildorder}</Markdown>
         </Grid>
         <Grid item>
           <Typography variant="h6">Comments</Typography>
-          {comments.map((comment) => (
-            <div key={comment.id}>
-              <Typography variant="body1">Username: {comment.username}</Typography>
-              <Typography variant="body1">{comment.content}</Typography>
-            </div>
-          ))}
+          <div style={{ marginTop: '1rem', width: '100%', maxWidth: '400px', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+            {comments.map((comment) => (
+              <div key={comment.id} style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: 'white', borderRadius: '4px' }}>
+                <Typography variant="body1">Username: {comment.username}</Typography>
+                <Typography variant="body1">{comment.content}</Typography>
+              </div>
+            ))}
+          </div>
         </Grid>
         <Grid item style={{ marginTop: '1rem', width: '100%', maxWidth: '400px' }}>
           <form onSubmit={handleCommentSubmit}>
