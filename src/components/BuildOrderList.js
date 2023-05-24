@@ -54,7 +54,7 @@ const BuildOrderList = () => {
   <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#ffd480' }}>
     <CardContent>
       <ListItem button component={Link} to={`/buildorders/${buildOrder.id}`}>
-        <ListItemText primary={buildOrder.title} secondary={buildOrder.description} />
+        <ListItemText primary={<h1>{buildOrder.title}</h1>} secondary={<h3>{buildOrder.description}</h3>} />
         {buildOrder.imgur_link && <img src={buildOrder.imgur_link} alt="Build Order Image" height="100px" width="100px" />}
       </ListItem>
     </CardContent>

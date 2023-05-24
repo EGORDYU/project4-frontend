@@ -12,7 +12,7 @@ export function Navigation() {
   }, []);
 
   return (
-    <AppBar position="static" sx={{ justifyContent: 'center' }}>
+    <AppBar position="static" sx={{ justifyContent: 'center', backgroundColor: '#ff6666' }}>
       <Toolbar>
         {isAuth ? (
           <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
@@ -20,7 +20,7 @@ export function Navigation() {
           </Button>
         ) : (
           <Button color="inherit" component={RouterLink} to="/users/create" sx={{ textDecoration: 'none' }}>
-            User
+            Make Account
           </Button>
         )}
         {isAuth ? (

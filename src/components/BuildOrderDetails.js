@@ -5,6 +5,7 @@ import { buildOrdersApi, commentsApi } from '../API.js';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
 import './markdownTable.css';
+import './details.css'
 
 const MarkdownTable = ({ children }) => (
   <table>
