@@ -33,7 +33,7 @@ const BuildOrderList = () => {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' , backgroundColor:'#ffeecc'}}>
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'auto' , backgroundColor:'#ffeecc'}}>
       <div style={{ width: '60%', marginLeft: '1rem', height: '100vh', backgroundColor: '#ffeecc'}}>
         <div style={{ display: 'flex', width: '100%', margin: 'auto' }}>
           <h1>Build Order List</h1>
