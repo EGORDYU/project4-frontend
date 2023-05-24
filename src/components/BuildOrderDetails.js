@@ -6,14 +6,11 @@ import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
 import './markdownTable.css';
 
-
 const MarkdownTable = ({ children }) => (
-    <table>
-      {children}
-    </table>
-  );
-  
-
+  <table>
+    {children}
+  </table>
+);
 
 const BuildOrderDetails = () => {
   const { id } = useParams();
@@ -58,7 +55,6 @@ const BuildOrderDetails = () => {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       });
-      console.log(response.data);
       localStorage.setItem('user_id', response.data.user_id);
       setUsername(response.data.username);
     } catch (error) {
@@ -89,12 +85,21 @@ const BuildOrderDetails = () => {
     }
   };
 
+  const handleDeleteComment = async (commentId) => {
+    try {
+      await commentsApi.delete(`/${commentId}/`);
+      setComments(comments.filter((comment) => comment.id !== commentId));
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
+  };
+
   if (!buildOrder) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem', backgroundColor:'#ffeecc' }}>
       <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
           <Typography variant="h4">Build Order Details</Typography>
@@ -107,32 +112,43 @@ const BuildOrderDetails = () => {
           <Markdown className="markdown-table">{buildOrder.description}</Markdown>
           <Markdown className="markdown-table">{buildOrder.buildorder}</Markdown>
         </Grid>
-        <Grid item>
+        <Grid item style={{ width: '100%' }}>
           <Typography variant="h6">Comments</Typography>
-          <div style={{ marginTop: '1rem', width: '100%', maxWidth: '400px', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px' }}>
+          <div style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', width: '50%' }}>
             {comments.map((comment) => (
-              <div key={comment.id} style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: 'white', borderRadius: '4px' }}>
+              <div key={comment.id} style={{ marginBottom: '1rem', padding: '1rem', backgroundColor: '#f5f5f5', borderRadius: '4px', alignSelf: 'stretch', wordWrap: 'break-word' }}>
                 <Typography variant="body1">Username: {comment.username}</Typography>
-                <Typography variant="body1">{comment.content}</Typography>
+                <Typography variant="body1">Comment: {comment.content}</Typography>
+                {comment.username === username && (
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    size="small"
+                    onClick={() => handleDeleteComment(comment.id)}
+                  >
+                    Delete
+                  </Button>
+                )}
               </div>
             ))}
           </div>
         </Grid>
-        <Grid item style={{ marginTop: '1rem', width: '100%', maxWidth: '400px' }}>
+        <Grid item style={{ width: '100%', maxWidth: '400px' }}>
           <form onSubmit={handleCommentSubmit}>
-            <TextField
-              label="New Comment"
-              variant="outlined"
-              multiline
-              rows={4}
-              fullWidth
-              value={newComment}
-              onChange={handleNewCommentChange}
-              style={{ marginBottom: '1rem' }}
-            />
-            <Button type="submit" variant="contained" color="primary" style={{ alignSelf: 'flex-end' }}>
-              Submit
-            </Button>
+            <div style={{ backgroundColor: 'white',display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', paddingBottom: '1rem' }}>
+              <TextField
+                label="New Comment"
+                variant="outlined"
+                multiline
+                rows={2}
+                fullWidth
+                value={newComment}
+                onChange={handleNewCommentChange}
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Submit
+              </Button>
+            </div>
           </form>
         </Grid>
       </Grid>

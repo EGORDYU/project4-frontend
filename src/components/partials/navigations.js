@@ -12,8 +12,8 @@ export function Navigation() {
   }, []);
 
   return (
-    <AppBar position="static">
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+    <AppBar position="static" sx={{ justifyContent: 'center' }}>
+      <Toolbar>
         {isAuth ? (
           <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
             Home

@@ -19,3 +19,8 @@
     font-weight: bold;
   }
   
+  .markdown-table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    background-color: #fff; /* Set the background color to white */
+  }
