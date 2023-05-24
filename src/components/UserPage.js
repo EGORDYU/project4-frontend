@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { TextField, Button, Typography, Box } from '@mui/material';
 
 const UserPage = () => {
   const [user, setUser] = useState({
@@ -23,32 +24,38 @@ const UserPage = () => {
   };
 
   return (
-    <div>
-      <h2>Create User</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={user.username}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleChange}
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <Box
+      component="form"
+      onSubmit={handleSubmit}
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: '300px',
+        margin: '0 auto',
+      }}
+    >
+      <Typography variant="h3" gutterBottom>
+        Create User
+      </Typography>
+      <TextField
+        label="Username"
+        name="username"
+        value={user.username}
+        onChange={handleChange}
+        margin="normal"
+      />
+      <TextField
+        label="Password"
+        type="password"
+        name="password"
+        value={user.password}
+        onChange={handleChange}
+        margin="normal"
+      />
+      <Button variant="contained" type="submit" sx={{ mt: 2 }}>
+        Register
+      </Button>
+    </Box>
   );
 };
 
