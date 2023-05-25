@@ -9,6 +9,7 @@ import { Login } from "./components/Login";
 import UserPage from './components/UserPage';
 import AboutMe from './components/partials/AboutMe';
 import Footer from './components/partials/Footer';
+import YourFavs from './components/Favs';
 import './App.css';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route path="/logout" element={<Logout />} />
               <Route path="/buildorders/:id" element={<BuildOrderDetails />} />
               <Route path="/makebo" element={<MakeBO />} />
+              <Route path="/faves" element={<YourFavs/>} />
             </Routes>
           </div>
         </div>

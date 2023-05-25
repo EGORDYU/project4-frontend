@@ -16,4 +16,19 @@ const buildOrdersApi = axios.create({
   }
 });
 
+const api = axios.create({
+    baseURL: "/api",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  });
+  
+  api.interceptors.request.use(request => {
+    request.headers['Authorization'] = `Bearer ${localStorage.getItem('access_token')}`;
+    return request;
+  });
+  
+export default api;
+
 export { commentsApi, buildOrdersApi };

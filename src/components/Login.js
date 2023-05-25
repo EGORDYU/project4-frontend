@@ -45,7 +45,7 @@ export const Login = () => {
                 margin: '0 auto',
             }}
         >
-            <Typography variant="h3" gutterBottom>
+            <Typography variant="p" gutterBottom>
                 Sign In
             </Typography>
             <TextField

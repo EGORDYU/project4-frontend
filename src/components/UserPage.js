@@ -34,7 +34,7 @@ const UserPage = () => {
         margin: '0 auto',
       }}
     >
-      <Typography variant="h3" gutterBottom>
+      <Typography variant="p" gutterBottom>
         Create User
       </Typography>
       <TextField
