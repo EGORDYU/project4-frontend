@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import FavoriteList from './FavoriteList';
+import { Link } from 'react-router-dom';
 
 const YourFavs = () => {
   const [favorites, setFavorites] = useState([]);
@@ -14,39 +15,39 @@ const YourFavs = () => {
     try {
       const userId = localStorage.getItem('user_id');
       const response = await axios.get(`http://localhost:8000/api/favorites/list/${userId}/`, {
-        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` }
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
       });
-      console.log(response.data);
-  
-      const favoriteBuilds = await Promise.all(response.data.map((favorite) => fetchBuild(favorite.build_order)));
-  
+      const favoriteBuilds = await Promise.all(
+        response.data.map(async (favorite) => {
+          const buildResponse = await axios.get(`http://localhost:8000/api/builds/${favorite.build_order}/`);
+          return buildResponse.data;
+        })
+      );
       setFavorites(favoriteBuilds);
     } catch (error) {
       console.error('Error fetching favorites:', error);
     }
   };
-  
-  
 
-  const fetchBuild = async (id) => {
-    try {
-      const response = await axios.get(`http://localhost:8000/api/builds/${id}/`); // Use the correct URL with the build id
-      console.log(id)
-      console.log(response.data)
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching build:', error);
-    }
-  };
-  
   return (
     <div>
       <h1>Your Favorites</h1>
       {favorites.length > 0 ? (
-        <FavoriteList favorites={favorites} />
-      ) : (
-        <div>No favorites found.</div>
-      )}
+  <div>
+    <h2>Your Favorite Build Orders:</h2>
+    {favorites.map((favorite) => (
+      <div key={favorite.id}>
+        <h3>
+          <Link to={`/buildorders/${favorite.id}`}>{favorite.title}</Link>
+        </h3>
+        <p>{favorite.description}</p>
+      </div>
+    ))}
+  </div>
+) : (
+  <div>No favorites found.</div>
+)}
+
     </div>
   );
 };
