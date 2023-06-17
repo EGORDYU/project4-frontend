@@ -4,14 +4,13 @@ import { Grid, Typography, TextField, Button } from '@mui/material';
 import { buildOrdersApi, commentsApi } from '../API.js';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
-import './markdownTable.css';
 import './details.css'
 
-const MarkdownTable = ({ children }) => (
-  <table>
-    {children}
-  </table>
-);
+// const MarkdownTable = ({ children }) => (
+//   <table>
+//     {children}
+//   </table>
+// );
 
 const BuildOrderDetails = () => {
   const { id } = useParams();
@@ -103,10 +102,7 @@ const BuildOrderDetails = () => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem', backgroundColor:'#ffeecc' }}>
       <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
-          <Typography variant="h4">Build Order Details</Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="h5">{buildOrder.title}</Typography>
+          <Typography variant="h2">{buildOrder.title}</Typography>
           <Typography variant="h5">{buildOrder.matchup}</Typography>
         </Grid>
         <Grid item>

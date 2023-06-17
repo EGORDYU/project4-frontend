@@ -24,7 +24,7 @@ const BuildOrderList = () => {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
       });
-      console.log('user_id:', response.data.user_id); // Add this line to check the value of user_id
+      console.log('user_id:', response.data.user_id); 
       localStorage.setItem('user_id', response.data.user_id);
     } catch (error) {
       console.error('Error fetching user id:', error);
@@ -83,14 +83,16 @@ const BuildOrderList = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'auto' , backgroundColor:'#ffeecc'}}>
       <div style={{ width: '60%', marginLeft: '1rem', height: '100vh', backgroundColor: '#ffeecc'}}>
-        <div style={{ display: 'flex', width: '100%', margin: 'auto' }}>
-          <h1>Build Order List</h1>
-        </div>
+      <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+  <h1 style={{ color: '#4a5d23' }}>Build Order List</h1>
+</div>
+
+
 {currentBuildOrders.map((buildOrder) => (
-  <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#ffd480', height: 180 }}>
+  <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#d1bea8', height: 180 }}>
     <CardContent>
       <ListItem button component={Link} to={`/buildorders/${buildOrder.id}`}>
-        <ListItemText primary={<h1 style={{ marginTop: '-15px' }}>{buildOrder.title}</h1>} secondary={<p>{buildOrder.description}</p>} />
+        <ListItemText primary={<h1 style={{ marginTop: '-15px', color:"#4a5d23"}}>{buildOrder.title}</h1>} secondary={<p>{buildOrder.description}</p>} />
         {buildOrder.imgur_link && <img src={buildOrder.imgur_link} alt="Build Order Image" height="100px" width="100px" />}
       </ListItem>
       <button onClick={() => addToFavorites(buildOrder.id)} style={{border: 'none', background: 'transparent'}}>

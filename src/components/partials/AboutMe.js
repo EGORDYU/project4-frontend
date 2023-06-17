@@ -45,6 +45,9 @@ export default function AboutMe() {
           <Typography variant="body1" gutterBottom>
             2000+ Hours of Coaching Experience
           </Typography>
+          <Typography variant="body1" gutterBottom>
+            Pricing: $20USD/hr or $80USD/5hr
+          </Typography>
           <StyledAvatar alt="Egor" src="/egor.jpg" />
           <Link href="https://twitter.com/ProbablyIsEGOR">
           <IconButton color="primary" aria-label="Twitter link">

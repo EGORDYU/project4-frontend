@@ -1,8 +1,8 @@
-// YourFavs.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import FavoriteList from './FavoriteList';
 import { Link } from 'react-router-dom';
+import { List, ListItem, ListItemText, Card, CardContent, Button } from '@mui/material';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const YourFavs = () => {
   const [favorites, setFavorites] = useState([]);
@@ -29,25 +29,43 @@ const YourFavs = () => {
     }
   };
 
-  return (
-    <div>
-      <h1>Your Favorites</h1>
-      {favorites.length > 0 ? (
-  <div>
-    <h2>Your Favorite Build Orders:</h2>
-    {favorites.map((favorite) => (
-      <div key={favorite.id}>
-        <h3>
-          <Link to={`/buildorders/${favorite.id}`}>{favorite.title}</Link>
-        </h3>
-        <p>{favorite.description}</p>
-      </div>
-    ))}
-  </div>
-) : (
-  <div>No favorites found.</div>
-)}
+  const deleteFavorite = async (buildOrderId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/favorites/${buildOrderId}/delete/`, {
+        headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
+      });
+      fetchFavorites();
+    } catch (error) {
+      console.error('Error deleting favorite:', error);
+    }
+  };
 
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'auto', backgroundColor: '#ffeecc' }}>
+      <div style={{ width: '60%', marginLeft: '1rem', height: '100vh', backgroundColor: '#ffeecc' }}>
+        <div style={{ display: 'flex', width: '100%', margin: 'auto', justifyContent: 'center', alignItems: 'center', marginBottom: '1rem' }}>
+          <h1>Your Favorites</h1>
+        </div>
+        {favorites.length > 0 ? (
+          <List>
+            {favorites.map((favorite) => (
+              <ListItem key={favorite.id}>
+                <Card style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#d1bea8', height: 180 }}>
+                  <CardContent>
+                    <Link to={`/buildorders/${favorite.id}`} style={{ textDecoration: 'none', color: '#d1bea8' }}>
+                      <ListItemText primary={<h2>{favorite.title}</h2>} secondary={<p>{favorite.description}</p>} />
+                    </Link>
+                    {/* {favorite.imgur_link && <img src={favorite.imgur_link} alt="Build Order Image" height="100px" width="100px" />} */}
+                    <Button style={{color: 'red'}}onClick={() => deleteFavorite(favorite.id)} color="secondary">Delete</Button>
+                  </CardContent>
+                </Card>
+              </ListItem>
+            ))}
+          </List>
+        ) : (
+          <div>No favorites found.</div>
+        )}
+      </div>
     </div>
   );
 };

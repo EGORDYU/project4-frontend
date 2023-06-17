@@ -20,7 +20,7 @@ function App() {
           <div style={{ width: '60%' }}>
             <Navigation />
           </div>
-          <div style={{ width: '60%'}}>
+          <div style={{ width: '60%', backgroundColor: '#ffeecc', minHeight: '100vh'}}>
             <Routes>
               <Route path="/" element={<BuildOrderList />} />
               <Route path="/login" element={<Login />} />
@@ -30,9 +30,11 @@ function App() {
               <Route path="/makebo" element={<MakeBO />} />
               <Route path="/faves" element={<YourFavs/>} />
             </Routes>
+            <Footer />
           </div>
+          
         </div>
-        <Footer />
+        
       </Router>
     </div>
   );
