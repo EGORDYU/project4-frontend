@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from 'react';
 import { buildOrdersApi } from '../API.js';
 
@@ -18,7 +19,7 @@ export default function MakeBO() {
       })
       .catch(console.error);
   };
-
+// eslint-disable-next-line
   const onSubmit = (e) => {
     e.preventDefault();
     const buildOrder = { title, description };
@@ -27,14 +28,14 @@ export default function MakeBO() {
       .then(() => refreshBuildOrders())
       .catch(console.error);
   };
-
+// eslint-disable-next-line
   const onDelete = (id) => {
     buildOrdersApi
       .delete(`/${id}`)
       .then(() => refreshBuildOrders())
       .catch(console.error);
   };
-
+// eslint-disable-next-line
   const onUpdate = (id) => {
     const buildOrder = { title, description };
     buildOrdersApi
@@ -42,7 +43,7 @@ export default function MakeBO() {
       .then(() => refreshBuildOrders())
       .catch(console.error);
   };
-
+// eslint-disable-next-line
   const selectBuildOrder = (id) => {
     const buildOrder = buildOrders.find((bo) => bo.id === id);
     if (buildOrder) {

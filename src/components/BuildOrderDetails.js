@@ -20,27 +20,27 @@ const BuildOrderDetails = () => {
   const [newComment, setNewComment] = useState('');
 
   useEffect(() => {
+    const fetchBuildOrder = async () => {
+      try {
+        const response = await buildOrdersApi.get(`/${id}/`);
+        setBuildOrder(response.data);
+      } catch (error) {
+        console.error('Error fetching build order:', error);
+      }
+    };
+  
+    const fetchComments = async () => {
+      try {
+        const response = await commentsApi.get(`?build_order=${id}`);
+        setComments(response.data);
+      } catch (error) {
+        console.error('Error fetching comments:', error);
+      }
+    };
+  
     fetchBuildOrder();
     fetchComments();
-  }, []);
-
-  const fetchBuildOrder = async () => {
-    try {
-      const response = await buildOrdersApi.get(`/${id}/`);
-      setBuildOrder(response.data);
-    } catch (error) {
-      console.error('Error fetching build order:', error);
-    }
-  };
-
-  const fetchComments = async () => {
-    try {
-      const response = await commentsApi.get(`?build_order=${id}`);
-      setComments(response.data);
-    } catch (error) {
-      console.error('Error fetching comments:', error);
-    }
-  };
+  }, [id]);
 
   useEffect(() => {
     if (buildOrder) {

@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { buildOrdersApi } from '../API.js';
 import axios from "axios";
 import AboutMe from './partials/AboutMe.js';
-import { List, ListItem, ListItemText, ListItemIcon, Card, CardContent } from '@mui/material';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import {ListItem, ListItemText, Card, CardContent } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const BuildOrderList = () => {
@@ -93,7 +92,7 @@ const BuildOrderList = () => {
     <CardContent>
       <ListItem button component={Link} to={`/buildorders/${buildOrder.id}`}>
         <ListItemText primary={<h1 style={{ marginTop: '-15px', color:"#4a5d23"}}>{buildOrder.title}</h1>} secondary={<p>{buildOrder.description}</p>} />
-        {buildOrder.imgur_link && <img src={buildOrder.imgur_link} alt="Build Order Image" height="100px" width="100px" />}
+        {buildOrder.imgur_link && <img src={buildOrder.imgur_link} alt="Build Order" height="100px" width="100px" />}
       </ListItem>
       <button onClick={() => addToFavorites(buildOrder.id)} style={{border: 'none', background: 'transparent'}}>
         <StarBorderIcon />

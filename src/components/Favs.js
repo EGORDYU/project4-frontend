@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { List, ListItem, ListItemText, Card, CardContent, Button } from '@mui/material';
-import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const YourFavs = () => {
   const [favorites, setFavorites] = useState([]);
