@@ -50,14 +50,6 @@ const UserPage = () => {
         margin="normal"
       />
       <TextField
-        label="Email"
-        type="email"
-        name="email"
-        value={user.email}
-        onChange={handleChange}
-        margin="normal"
-      />
-      <TextField
         label="Password"
         type="password"
         name="password"
