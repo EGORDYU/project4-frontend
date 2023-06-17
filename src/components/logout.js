@@ -18,7 +18,7 @@ export const Logout = () => {
         accessToken = accessToken.trim();
 
         const response = await axios.post(
-          'http://localhost:8000/logout/',
+          'https://zergcoach-d7f65394356e.herokuapp.com/logout/',
           { refresh_token: refreshToken },
           {
             headers: {

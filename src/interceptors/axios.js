@@ -10,7 +10,7 @@ axios.interceptors.response.use(
       refresh = true;
       console.log(localStorage.getItem('refresh_token'));
       const response = await axios.post(
-        'http://localhost:8000/token/refresh/',
+        'https://zergcoach-d7f65394356e.herokuapp.com/token/refresh/',
         {
           refresh: localStorage.getItem('refresh_token'),
         },

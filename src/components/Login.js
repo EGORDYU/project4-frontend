@@ -1,4 +1,4 @@
-// Import the react JS packages 
+// Import the react JS packages
 import axios from "axios";
 import { useState } from "react";
 import TextField from '@mui/material/TextField';
@@ -20,7 +20,7 @@ export const Login = () => {
         };
         // Create the POST request
         const { data } = await
-            axios.post('http://localhost:8000/token/',
+            axios.post('https://zergcoach-d7f65394356e.herokuapp.com/token/',
                 user, {
                 headers: { 'Content-Type': 'application/json' },
                 withCredentials: true

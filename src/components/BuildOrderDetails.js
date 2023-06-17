@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid, Typography, TextField, Button } from '@mui/material';
 import { buildOrdersApi, commentsApi } from '../API.js';
 import axios from 'axios';
 import Markdown from 'markdown-to-jsx';
-import './details.css'
-
-// const MarkdownTable = ({ children }) => (
-//   <table>
-//     {children}
-//   </table>
-// );
+import './details.css';
 
 const BuildOrderDetails = () => {
   const { id } = useParams();
@@ -28,7 +22,7 @@ const BuildOrderDetails = () => {
         console.error('Error fetching build order:', error);
       }
     };
-  
+
     const fetchComments = async () => {
       try {
         const response = await commentsApi.get(`?build_order=${id}`);
@@ -37,7 +31,7 @@ const BuildOrderDetails = () => {
         console.error('Error fetching comments:', error);
       }
     };
-  
+
     fetchBuildOrder();
     fetchComments();
   }, [id]);
@@ -50,7 +44,7 @@ const BuildOrderDetails = () => {
 
   const fetchUsername = async () => {
     try {
-      const response = await axios.get('/api/user/profile/', {
+      const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('access_token')}`,
         },
@@ -99,7 +93,7 @@ const BuildOrderDetails = () => {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem', backgroundColor:'#ffeecc' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '100vh', padding: '1rem', backgroundColor: '#ffeecc' }}>
       <Grid container direction="column" alignItems="center" spacing={2}>
         <Grid item>
           <Typography variant="h2">{buildOrder.title}</Typography>
@@ -132,7 +126,7 @@ const BuildOrderDetails = () => {
         </Grid>
         <Grid item style={{ width: '100%', maxWidth: '400px' }}>
           <form onSubmit={handleCommentSubmit}>
-            <div style={{ backgroundColor: 'white',display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', paddingBottom: '1rem' }}>
+            <div style={{ backgroundColor: 'white', display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', paddingBottom: '1rem' }}>
               <TextField
                 label="New Comment"
                 variant="outlined"

@@ -13,12 +13,12 @@ const YourFavs = () => {
   const fetchFavorites = async () => {
     try {
       const userId = localStorage.getItem('user_id');
-      const response = await axios.get(`http://localhost:8000/api/favorites/list/${userId}/`, {
+      const response = await axios.get(`https://zergcoach-d7f65394356e.herokuapp.com/api/favorites/list/${userId}/`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
       });
       const favoriteBuilds = await Promise.all(
         response.data.map(async (favorite) => {
-          const buildResponse = await axios.get(`http://localhost:8000/api/builds/${favorite.build_order}/`);
+          const buildResponse = await axios.get(`https://zergcoach-d7f65394356e.herokuapp.com/api/builds/${favorite.build_order}/`);
           return buildResponse.data;
         })
       );
@@ -30,7 +30,7 @@ const YourFavs = () => {
 
   const deleteFavorite = async (buildOrderId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/favorites/${buildOrderId}/delete/`, {
+      await axios.delete(`https://zergcoach-d7f65394356e.herokuapp.com/api/favorites/${buildOrderId}/delete/`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem('access_token')}` },
       });
       fetchFavorites();
@@ -55,7 +55,7 @@ const YourFavs = () => {
                       <ListItemText primary={<h2>{favorite.title}</h2>} secondary={<p>{favorite.description}</p>} />
                     </Link>
                     {/* {favorite.imgur_link && <img src={favorite.imgur_link} alt="Build Order Image" height="100px" width="100px" />} */}
-                    <Button style={{color: 'red'}}onClick={() => deleteFavorite(favorite.id)} color="secondary">Delete</Button>
+                    <Button style={{color: 'red'}} onClick={() => deleteFavorite(favorite.id)} color="secondary">Delete</Button>
                   </CardContent>
                 </Card>
               </ListItem>
