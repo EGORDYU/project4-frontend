@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -20,7 +20,7 @@ const UserPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/users/create/', user);
+      const response = await axios.post('https://zergcoach-d7f65394356e.herokuapp.com/api/users/create/', user);
       console.log(response.data); // handle success
       navigate('/login'); // navigate to login
     } catch (error) {
@@ -46,6 +46,14 @@ const UserPage = () => {
         label="Username"
         name="username"
         value={user.username}
+        onChange={handleChange}
+        margin="normal"
+      />
+      <TextField
+        label="Email"
+        type="email"
+        name="email"
+        value={user.email}
         onChange={handleChange}
         margin="normal"
       />
