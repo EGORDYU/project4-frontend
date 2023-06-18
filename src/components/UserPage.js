@@ -20,7 +20,7 @@ const UserPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://zergcoach-d7f65394356e.herokuapp.com/api/users/create/', user);
+      const response = await axios.post('https://zergcoach-d7f65394356e.herokuapp.com/users/create/', user);
       console.log(response.data); // handle success
       navigate('/login'); // navigate to login
     } catch (error) {
