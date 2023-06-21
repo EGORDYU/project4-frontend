@@ -13,6 +13,7 @@ const BuildOrderList = () => {
 
   useEffect(() => {
     fetchUserId();
+    fetchBuildOrders();
   }, []);
 
   const fetchUserId = async () => {
@@ -29,13 +30,14 @@ const BuildOrderList = () => {
     }
   };
 
-  useEffect(() => {
-    fetchBuildOrders();
-  }, []);
-
   const fetchBuildOrders = async () => {
     try {
-      const response = await buildOrdersApi.get('/');
+      const token = localStorage.getItem('access_token');
+      const response = await buildOrdersApi.get('/', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setBuildOrders(response.data);
     } catch (error) {
       console.error('Error fetching build orders:', error);
