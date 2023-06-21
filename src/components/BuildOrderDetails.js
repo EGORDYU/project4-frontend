@@ -62,13 +62,13 @@ const BuildOrderDetails = () => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
-
+  
     const commentData = {
       build_order: id,
       content: newComment,
-      // user: localStorage.getItem('user_id'),
+      user: [localStorage.getItem('user_id')],
     };
-
+  
     try {
       const response = await commentsApi.post('/', commentData);
       setComments([...comments, response.data]);
@@ -78,6 +78,7 @@ const BuildOrderDetails = () => {
       console.log('Error details:', error.response.data);
     }
   };
+  
 
   const handleDeleteComment = async (commentId) => {
     try {
