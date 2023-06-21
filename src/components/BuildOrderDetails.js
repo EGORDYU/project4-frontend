@@ -66,6 +66,7 @@ const BuildOrderDetails = () => {
     const commentData = {
       build_order: id,
       content: newComment,
+      user: username,
     };
   
     try {
