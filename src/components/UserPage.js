@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import React, { useState } from 'react';
 import axios from 'axios';
 import { TextField, Button, Typography, Box } from '@mui/material';
@@ -46,6 +45,13 @@ const UserPage = () => {
         label="Username"
         name="username"
         value={user.username}
+        onChange={handleChange}
+        margin="normal"
+      />
+      <TextField
+        label="Email"
+        name="email"
+        value={user.email}
         onChange={handleChange}
         margin="normal"
       />
