@@ -49,7 +49,7 @@ const BuildOrderList = () => {
         user_id: parseInt(user_id),
         build_order: buildOrderId
       };
-      await axios.post('https://zergcoach-d7f65394356e.herokuapp.com/api/favorites/', payload, {
+      await axios.post('https://zergcoach-d7f65394356e.herokuapp.com/favorites/', payload, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
           'Content-Type': 'application/json'
