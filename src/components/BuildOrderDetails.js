@@ -66,11 +66,14 @@ const BuildOrderDetails = () => {
     const commentData = {
       build_order: id,
       content: newComment,
-      user: [localStorage.getItem('user_id')],
     };
   
     try {
-      const response = await commentsApi.post('/', commentData);
+      const response = await commentsApi.post('/', commentData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
       setComments([...comments, response.data]);
       setNewComment('');
     } catch (error) {
@@ -78,6 +81,7 @@ const BuildOrderDetails = () => {
       console.log('Error details:', error.response.data);
     }
   };
+  
   
 
   const handleDeleteComment = async (commentId) => {
