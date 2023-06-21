@@ -66,7 +66,7 @@ const BuildOrderDetails = () => {
     const commentData = {
       build_order: id,
       content: newComment,
-      user: localStorage.getItem('user_id'),
+      // user: localStorage.getItem('user_id'),
     };
 
     try {
