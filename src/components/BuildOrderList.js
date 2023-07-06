@@ -9,6 +9,8 @@ const BuildOrderList = () => {
   const [buildOrders, setBuildOrders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 4; // number of build orders per page
+  
+  
 
   useEffect(() => {
     fetchBuildOrders();
@@ -23,13 +25,31 @@ const BuildOrderList = () => {
     }
   };
 
-  const addToFavorites = async (buildOrderId) => {
+  const addToFavorites = async (buildOrderId, userId) => {
     try {
-      // Add your code for adding to favorites
+      const token = localStorage.getItem('access_token');
+      const response = await axios.post(
+        'https://zergcoach-d7f65394356e.herokuapp.com/favorites/',
+        { build_order: buildOrderId, user: userId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      console.log('Favorite added:', response.data);
     } catch (error) {
       console.error('Error adding to favorites:', error);
+      if (error.response) {
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+      } else if (error.request) {
+          console.log(error.request);
+      } else {
+          console.log('Error', error.message);
+      }
     }
   };
+  
+  
+  
 
   // Get current posts
   const indexOfLastPost = currentPage * itemsPerPage;
