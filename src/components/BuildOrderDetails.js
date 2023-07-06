@@ -37,12 +37,6 @@ const BuildOrderDetails = () => {
     fetchComments();
   }, [id]);
 
-  useEffect(() => {
-    if (buildOrder) {
-      fetchUsername();
-    }
-  }, [buildOrder]);
-
   const fetchUsername = async () => {
     try {
       const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
@@ -56,6 +50,16 @@ const BuildOrderDetails = () => {
       console.error('Error fetching username:', error);
     }
   };
+
+ useEffect(() => {
+    fetchBuildOrder();
+    fetchComments();
+    if (buildOrder) {
+      fetchUsername();
+    }
+  }, [id, buildOrder]);
+
+
 
   const handleNewCommentChange = (event) => {
     setNewComment(event.target.value);
