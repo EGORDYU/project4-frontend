@@ -50,14 +50,12 @@ const BuildOrderDetails = () => {
       console.error('Error fetching username:', error);
     }
   };
-
- useEffect(() => {
-    fetchBuildOrder();
-    fetchComments();
+  
+  useEffect(() => {
     if (buildOrder) {
       fetchUsername();
     }
-  }, [id, buildOrder]);
+  }, [buildOrder]);
 
 
 
