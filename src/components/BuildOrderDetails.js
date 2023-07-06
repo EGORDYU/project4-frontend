@@ -13,7 +13,20 @@ const BuildOrderDetails = () => {
   const [username, setUsername] = useState('');
   const [newComment, setNewComment] = useState('');
   const token = localStorage.getItem('access_token');
-
+  
+  const fetchUsername = async () => {
+    try {
+      const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+        },
+      });
+      localStorage.setItem('user_id', response.data.user_id);
+      setUsername(response.data.username);
+    } catch (error) {
+      console.error('Error fetching username:', error);
+    }
+  };
   useEffect(() => {
     const fetchBuildOrder = async () => {
       try {
@@ -33,19 +46,6 @@ const BuildOrderDetails = () => {
       }
     };
   
-    const fetchUsername = async () => {
-      try {
-        const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-          },
-        });
-        localStorage.setItem('user_id', response.data.user_id);
-        setUsername(response.data.username);
-      } catch (error) {
-        console.error('Error fetching username:', error);
-      }
-    };
   
     fetchBuildOrder();
     fetchComments();
