@@ -23,7 +23,7 @@ const BuildOrderDetails = () => {
         console.error('Error fetching build order:', error);
       }
     };
-
+  
     const fetchComments = async () => {
       try {
         const response = await commentsApi.get(`?build_order=${id}`);
@@ -32,30 +32,28 @@ const BuildOrderDetails = () => {
         console.error('Error fetching comments:', error);
       }
     };
-
+  
+    const fetchUsername = async () => {
+      try {
+        const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          },
+        });
+        localStorage.setItem('user_id', response.data.user_id);
+        setUsername(response.data.username);
+      } catch (error) {
+        console.error('Error fetching username:', error);
+      }
+    };
+  
     fetchBuildOrder();
     fetchComments();
-  }, [id]);
-
-  const fetchUsername = async () => {
-    try {
-      const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      localStorage.setItem('user_id', response.data.user_id);
-      setUsername(response.data.username);
-    } catch (error) {
-      console.error('Error fetching username:', error);
-    }
-  };
-  
-  useEffect(() => {
     if (buildOrder) {
       fetchUsername();
     }
-  }, [buildOrder]);
+  }, [id, buildOrder, fetchUsername]);
+  
 
 
 
