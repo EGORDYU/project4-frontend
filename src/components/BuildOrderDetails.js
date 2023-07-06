@@ -12,6 +12,7 @@ const BuildOrderDetails = () => {
   const [comments, setComments] = useState([]);
   const [username, setUsername] = useState('');
   const [newComment, setNewComment] = useState('');
+  const token = localStorage.getItem('access_token');
 
   useEffect(() => {
     const fetchBuildOrder = async () => {
@@ -46,7 +47,7 @@ const BuildOrderDetails = () => {
     try {
       const response = await axios.get('https://zergcoach-d7f65394356e.herokuapp.com/api/user/profile/', {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       localStorage.setItem('user_id', response.data.user_id);
@@ -72,7 +73,7 @@ const BuildOrderDetails = () => {
     try {
       const response = await commentsApi.post('/', commentData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setComments([...comments, response.data]);
@@ -83,11 +84,13 @@ const BuildOrderDetails = () => {
     }
   };
   
-  
-
   const handleDeleteComment = async (commentId) => {
     try {
-      await commentsApi.delete(`/${commentId}/`);
+      await commentsApi.delete(`/${commentId}/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setComments(comments.filter((comment) => comment.id !== commentId));
     } catch (error) {
       console.error('Error deleting comment:', error);
@@ -131,26 +134,31 @@ const BuildOrderDetails = () => {
           </div>
         </Grid>
         <Grid item style={{ width: '100%', maxWidth: '400px' }}>
-          <form onSubmit={handleCommentSubmit}>
-            <div style={{ backgroundColor: 'white', display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', paddingBottom: '1rem' }}>
-              <TextField
-                label="New Comment"
-                variant="outlined"
-                multiline
-                rows={2}
-                fullWidth
-                value={newComment}
-                onChange={handleNewCommentChange}
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Submit
-              </Button>
-            </div>
-          </form>
-        </Grid>
+  {localStorage.getItem('access_token') ? (
+    <form onSubmit={handleCommentSubmit}>
+      <div style={{ backgroundColor: 'white', display: 'flex', justifyContent: 'space-between', marginBottom: '4rem', paddingBottom: '1rem' }}>
+        <TextField
+          label="New Comment"
+          variant="outlined"
+          multiline
+          rows={2}
+          fullWidth
+          value={newComment}
+          onChange={handleNewCommentChange}
+        />
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
+      </div>
+    </form>
+  ) : (
+    <div>Please log in to leave a comment.</div>
+  )}
+</Grid>
+
       </Grid>
     </div>
   );
-};
+  };
 
 export default BuildOrderDetails;

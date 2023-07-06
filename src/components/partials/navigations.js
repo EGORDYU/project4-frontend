@@ -14,15 +14,16 @@ export function Navigation() {
     return (
         <AppBar position="static" sx={{ justifyContent: 'center', backgroundColor: '#4b5320' }}>
             <Toolbar>
-                {isAuth ? (
-                    <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
-                        Home
-                    </Button>
-                ) : (
+
+                <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>
+                    Build Orders
+                </Button>
+                {!isAuth && (
                     <Button color="inherit" component={RouterLink} to="/users/create" sx={{ textDecoration: 'none' }}>
                         Make Account
                     </Button>
                 )}
+
                 {isAuth ? (
                     <Button color="inherit" component={RouterLink} to="/logout" sx={{ textDecoration: 'none' }}>
                         Logout

@@ -33,7 +33,7 @@ export const Logout = () => {
         if (response.status === 205) {
             localStorage.clear();
             axios.defaults.headers.common['Authorization'] = null;
-            window.location.href = '/login';
+            window.location.href = '/';
         } else {
             console.error('Failed to log out on the server side.');
         }
