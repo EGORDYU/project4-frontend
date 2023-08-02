@@ -12,7 +12,7 @@ export function Navigation() {
     }, []);
 
     return (
-        <AppBar position="static" sx={{ justifyContent: 'center', backgroundColor: '#4b5320' }}>
+        <AppBar position="static" sx={{ justifyContent: 'center', backgroundColor: 'rgb(0, 130, 255)' }}>
             <Toolbar>
 
                 <Button color="inherit" component={RouterLink} to="/" sx={{ textDecoration: 'none' }}>

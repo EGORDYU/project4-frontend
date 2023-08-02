@@ -63,14 +63,14 @@ const BuildOrderList = () => {
     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', overflow: 'auto', backgroundColor: '#ffeecc' }}>
       <div style={{ width: '60%', marginLeft: '1rem', height: '100vh', backgroundColor: '#ffeecc' }}>
         <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-          <h1 style={{ color: '#4a5d23' }}>Build Order List</h1>
+          <h1 style={{ color: 'rgb(0, 130, 255)' }}>Build Order List</h1>
         </div>
 
         {currentBuildOrders.map((buildOrder) => (
-          <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#d1bea8', height: 180 }}>
+          <Card key={buildOrder.id} style={{ width: '100%', marginBottom: '1rem', backgroundColor: '#d1bea8', height: 260 }}>
             <CardContent>
               <ListItem button component={Link} to={`/buildorders/${buildOrder.id}`}>
-                <ListItemText primary={<h1 style={{ marginTop: '-15px', color: "#4a5d23" }}>{buildOrder.title}</h1>} secondary={<p>{buildOrder.description}</p>} />
+                <ListItemText primary={<h1 style={{ marginTop: '-15px', color: "rgb(0, 130, 255)", height:140 }}>{buildOrder.title}</h1>} secondary={<p>{buildOrder.description}</p>} />
                 {buildOrder.imgur_link && <img src={buildOrder.imgur_link} alt="Build Order" height="100px" width="100px" />}
               </ListItem>
               <Button onClick={() => addToFavorites(buildOrder.id)} style={{ border: 'none', background: 'transparent' }}>

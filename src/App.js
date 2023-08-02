@@ -13,7 +13,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="app-container" style={{ backgroundColor: '#d5cbae', minHeight: '100vh' }}>
+    <div className="app-container" style={{ background: 'linear-gradient(to bottom, #d5cbae, #ffffff)', minHeight: '100vh' }}>
       <Router>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
           <div style={{ width: '60%' }}>
